@@ -1,5 +1,4 @@
 import { experimental_extendTheme as extendTheme } from '@mui/material/styles'
-import { pink } from '@mui/material/colors'
 
 
 // Create a theme instance.
@@ -12,14 +11,14 @@ const theme = extendTheme({
     light: {
       palette: {
         primary: {
-          main: pink[600]
+          main: '#4A90E2'
         }
       }
     },
     dark: {
       palette: {
         primary: {
-          main: pink[400]
+          main: '#3C6EAD'
         }
       }
     }
