@@ -8,7 +8,10 @@ import GroupIcon from '@mui/icons-material/Group'
 import ChatIcon from '@mui/icons-material/Chat'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
-function Card() {
+function Card({ card }) {
+  const shouldShowCardActions = () => {
+    return !!card?.memberIds.length || !!card?.comments.length || !!card?.attachments.length
+  }
   return (
     <>
       <MuiCard sx={{
@@ -16,58 +19,29 @@ function Card() {
         boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
         overflow: 'unset'
       }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="https://static1.srcdn.com/wordpress/wp-content/uploads/2023/09/naruto-s-akatsuki-villains.jpg"
-          title="Akatsuki Gang" />
+        {card?.cover &&
+          <CardMedia
+            sx={{ height: 140 }}
+            image={card?.cover}
+          />
+        }
+
         <CardContent sx={{
           p: 1.5,
           '&:last-child': { p: 1.5 }
         }}>
           <Typography>
-                  Akatsuki
+            {card?.title}
           </Typography>
         </CardContent>
-        <CardActions sx={{ p: '0px 4px 8px 4px' }}>
-          <Button startIcon={<GroupIcon />} size="small">20</Button>
-          <Button startIcon={<ChatIcon />} size="small">10</Button>
-          <Button startIcon={<AttachmentIcon />} size="small">5</Button>
-        </CardActions>
-      </MuiCard><MuiCard sx={{
-        cursor: 'pointer',
-        boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
-        overflow: 'unset'
-      }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="https://i.ytimg.com/vi/4D6as7R0OGM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDBbbApNXBky6aR9IGq7_AazNLAnA"
-          title="Uchiha Itachi" />
-        <CardContent sx={{
-          p: 1.5,
-          '&:last-child': { p: 1.5 }
-        }}>
-          <Typography>
-                      Itachi Uchiha
-          </Typography>
-        </CardContent>
-      </MuiCard><MuiCard sx={{
-        cursor: 'pointer',
-        boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
-        overflow: 'unset'
-      }}>
-        <CardMedia
-          sx={{ height: 140 }}
-          image="https://i.ytimg.com/vi/4D6as7R0OGM/hq720.jpg?sqp=-oaymwEhCK4FEIIDSFryq4qpAxMIARUAAAAAGAElAADIQj0AgKJD&rs=AOn4CLDBbbApNXBky6aR9IGq7_AazNLAnA"
-          title="Uchiha Itachi" />
-        <CardContent sx={{
-          p: 1.5,
-          '&:last-child': { p: 1.5 }
-        }}>
-          <Typography>
-                      Itachi Uchiha
-          </Typography>
-        </CardContent>
-      </MuiCard></>
+        {shouldShowCardActions() && <CardActions sx={{ p: '0px 4px 8px 4px' }}>
+          {!!card?.memberIds.length && <Button startIcon={<GroupIcon />} size="small">{card?.memberIds.length}</Button>}
+          {!!card?.comments.length && <Button startIcon={<ChatIcon />} size="small">{card?.comments.length}</Button>}
+          {!!card?.attachments.length && <Button startIcon={<AttachmentIcon />} size="small">{card?.attachments.length}</Button>}
+        </CardActions>}
+
+      </MuiCard>
+    </>
   )
 }
 
