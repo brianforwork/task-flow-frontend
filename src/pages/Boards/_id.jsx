@@ -7,6 +7,7 @@ import { useEffect, useState } from 'react'
 import { fetchBoardDetailsAPI } from '~/apis'
 
 function Board() {
+  // eslint-disable-next-line no-unused-vars
   const [board, setBoard] = useState(null)
 
   useEffect(() => {
