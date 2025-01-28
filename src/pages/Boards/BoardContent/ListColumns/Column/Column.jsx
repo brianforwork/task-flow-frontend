@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import React from 'react'
@@ -23,6 +24,7 @@ import { CSS } from '@dnd-kit/utilities'
 import { useState } from 'react'
 import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
+import { toast } from 'react-toastify'
 
 
 function Column({ column }) {
@@ -52,7 +54,7 @@ function Column({ column }) {
 
   const addNewCard = () => {
     if (!newCardTitle) {
-      console.error('Please Enter Your Card Name!')
+      toast.error('Please Enter Your Card Name!')
       return
     }
     console.log(newCardTitle)
