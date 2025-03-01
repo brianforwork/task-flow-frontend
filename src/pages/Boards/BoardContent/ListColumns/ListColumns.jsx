@@ -9,19 +9,24 @@ import TextField from '@mui/material/TextField'
 import CloseIcon from '@mui/icons-material/Close'
 import { toast } from 'react-toastify'
 
-function ListColumns({ columns }) {
+function ListColumns({ columns, createNewColumn, createNewCard }) {
   const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
   const toggleOpenNewColumnForm = () => setOpenNewColumnForm(!openNewColumnForm)
   const [newColumnTitle, setNewColumnTitle] = useState('')
 
-  const addNewColumn = () => {
+  const addNewColumn = async () => {
     if (!newColumnTitle) {
       toast.error('Please Enter Your Column Name!')
       return
     }
-    console.log(newColumnTitle)
-    // Call API here
 
+    // Call API here
+    const newColumnData = {
+      title: newColumnTitle
+    }
+
+
+    await createNewColumn(newColumnData)
     toggleOpenNewColumnForm()
     setNewColumnTitle('')
   }
@@ -38,7 +43,7 @@ function ListColumns({ columns }) {
         '&::-webkit-scrollbar-track': { m:2 }
       }}>
         {/*Box Column 1*/}
-        {columns?.map(column => <Column column={column} key={column._id} />)}
+        {columns?.map(column => <Column column={column} key={column._id} createNewCard={createNewCard} />)}
         {!openNewColumnForm
           ? <Box onClick = {toggleOpenNewColumnForm} sx={{
             minWidth: '250px',
@@ -124,7 +129,6 @@ function ListColumns({ columns }) {
 
       </Box>
     </SortableContext>
-
   )
 }
 
